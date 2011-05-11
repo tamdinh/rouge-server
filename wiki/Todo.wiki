@@ -1,0 +1,8 @@
+#summary Stuff that needs to be done.
+
+ * Load command through reflections
+ * Admin
+ * Log of transmissions (in and out)
+ * CPU / Memory / Network Monitor
+ * Secret for callback (i.e. kicking)
+ * Credits and libs
