@@ -1,8 +1,24 @@
 #summary Stuff that needs to be done.
 
- * Load command through reflections
- * Admin
- * Log of transmissions (in and out)
- * CPU / Memory / Network Monitor
- * Secret for callback (i.e. kicking)
- * Credits and libs
+=Core=
+
+ * Dynamically load extension jars
+ * Fix Log4j for file logs
+ 
+=Driver=
+
+* Binary protocol (BEncode? Protocol Buffer? Custom Solution?)
+ * CSharp Driver
+ 
+=Deployment=
+
+ * Create the Start.bat 
+ * Fix the daemon script
+ * Create something to make NT services ( http://code.google.com/p/rouge-server/ )
+
+=Web Admin=
+
+ * Get User and Password from Config script
+ * Create Services for special commands (i.e. kicking)
+ * Add secret key in config for callback  
+ * Add credits in Web Admin?
