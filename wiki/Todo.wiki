@@ -7,7 +7,7 @@
  
 =Driver=
 
-* Binary protocol (BEncode? Protocol Buffer? Custom Solution?)
+ * Binary protocol (BEncode? Protocol Buffer? Custom Solution?)
  * CSharp Driver
  
 =Deployment=
