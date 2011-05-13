@@ -13,7 +13,8 @@ In our scenario, the highscore.get command would have no payload, the command si
 Publishing our highscore would have payload of two paramters, a string with the players "name" and an integer holding the "score". It would return a boolean "newHighScore" indicating if the submitted highscore was indeed a new high score.
 
 If we were to send the commands using the Java client, the commands would look as such:
- 
+
+{{{
  RougeObject payload = new RougeObject();
  rougeDriver.send("highscore.get", payload);
 
@@ -21,9 +22,11 @@ If we were to send the commands using the Java client, the commands would look a
  payload.putString("name", "High Scorer"); 
  payload.putInt("score", 999999);
  rougeDriver.send("highscore.submit", payload);
+}}}
 
 The code to handle the output would be as such.
 
+{{{
 public void onMessage(String command, RougeObject payload) {
 		
 	if (command.equals("highscore.get") || command.equals("highscore.update")) {
@@ -38,6 +41,7 @@ public void onMessage(String command, RougeObject payload) {
 		}
 	}
 }
+}}}
 
 =Setting up a Development Environment=
 
