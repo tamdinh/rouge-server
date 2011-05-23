@@ -10,6 +10,7 @@
  * Blueprint CSS 1.0 - Modified MIT
  * JQuery 1.4.2 - MIT
  * Flot 0.7 - MIT
+ * Joda Time 1.6.2 - The Apache Software License, Version 2.0
  * Hiperic Sigar 1.6.4 - The Apache Software License, Version 2.0
  * Ant 1.6.5 -  The Apache Software License, Version 2.0
  * Commons Beanutils 1.8.3 - Apache License, Version 2.0
