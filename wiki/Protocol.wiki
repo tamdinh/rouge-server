@@ -24,39 +24,46 @@
   * ret: boolean
   * error: string
 
-logoff
-in
-out
-ret: boolean
+==logoff==
 
-server.kicked
-in
+===out===
+  * ret: boolean
+
+==server.kicked==
+
 Never sent from client
-out
-reason: string
+===out===
+  * reason: string
 
-im.msg
-in
-username: string
-msg: string
-out
-ret: boolean
+=Instant Message=
 
-im.recv
-in
+==im.msg==
+
+===in===
+  * username: string
+  * msg: string
+===out===
+  * ret: boolean
+
+==im.recv==
+
 Never sent from client
-out
+===out===
 msg: string	
 
-ach.get
-in
-out
-ach : RougeArray of RougeObject
-  	key: string
-  	point: int
-  	progress: double
-  	total: double
-ret: boolean
+=Achievements=
+
+==ach.get==
+
+===in===
+  * none 
+===out===
+  * ach : RougeArray of RougeObject
+    * key: string
+    * point: int
+    * progress: double
+    * total: double
+  * ret: boolean
 
 ach.update
 in
