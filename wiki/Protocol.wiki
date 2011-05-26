@@ -19,6 +19,7 @@
   * lastname: string
   * email: string
 ===out (success)===
+  * id: long
   * ret: boolean
 ===out (error)===
   * ret: boolean
