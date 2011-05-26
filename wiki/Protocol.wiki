@@ -1,7 +1,6 @@
 #summary The protocol used by Rouge server.
 
 =Server & Authentification=
----
 
 == login==
 
@@ -110,91 +109,104 @@ Never sent from client
   * ret: boolean
 
 =Mail=
----
 
-mail.getall
-in
-out
-mails: RougeArray of RougeObject
-  id: long
-  to: long
-  from: long
-  content: RougeObject
-ret: boolean
+==mail.getall==
 
-mail.getunread
-in
-out
-mails: RougeArray of RougeObject
-  id: long
-  to: long
-  from: long
-  content: RougeObject
-ret: boolean
+===in===
+  * None
+===out===
+  * mails: RougeArray of RougeObject
+    * id: long
+    * to: long
+    * from: long
+    * content: RougeObject
+  * ret: boolean
 
-mail.send
-in
-long: to
-content: RougeObject
-out
-ret: boolean
+==mail.getunread==
 
-mail.setread
-in
-id: long
-out
-ret: boolean
+===in===
+* None
+===out===
+  * mails: RougeArray of RougeObject
+    * id: long
+    * to: long
+    * from: long
+    * content: RougeObject
+  * ret: boolean
 
-mail.delete
-in
-id: long
-out
-ret: boolean
+==mail.send==
 
-room.create
-in
-name: key
-out
-ret: boolean
+===in===
+  * long: to
+  * content: RougeObject
+===out===
+  * ret: boolean
 
-room.delete
-in
-name: key
-out
-ret: boolean
+==mail.setread==
 
-room.join
-in
-name: key
-out
-ret: boolean
+===in===
+  * id: long
+===out===
+ * ret: boolean
 
-room.leave
-in
-name: key
-out
-ret: boolean
+==mail.delete==
 
-room.say
-in
-name: key
-msg: RougeObject
-out
-ret: boolean
+===in===
+  * id: long
+===out===
+ * ret: boolean
 
-room.recv
-in
+=Rooms=
+
+==room.create==
+
+===in===
+  * name: key
+===out===
+  * ret: boolean
+
+==room.delete==
+
+===in===
+  * name: key
+===out===
+  * ret: boolean
+
+==room.join==
+
+===in===
+  * name: key
+===out===
+  * ret: boolean
+
+==room.leave==
+
+===in===
+  * name: key
+===out===
+  * ret: boolean
+
+==room.say==
+
+===in===
+  * name: key
+  * msg: RougeObject
+===out===
+  * ret: boolean
+
+==room.recv==
+
 Never sent from client
-out
-name: key
-msg: RougeObject
-ret: boolean
+===out===
+  * name: key
+  * msg: RougeObject
+  * ret: boolean
 
-room.kicked
-in
+==room.kicked==
+
 Never sent from client
-out
-name: string
+===out===
+  * name: string
 
 room.destroy
 in
