@@ -1,6 +1,7 @@
 #summary The protocol used by Rouge server.
 
 =Server & Authentification=
+---
 
 == login==
 
@@ -49,7 +50,7 @@ Never sent from client
 
 Never sent from client
 ===out===
-msg: string	
+  * msg: string	
 
 =Achievements=
 
@@ -65,41 +66,51 @@ msg: string
     * total: double
   * ret: boolean
 
-ach.update
-in
-key: string
-progress: double
-out
-key: string
-progress: double
+==ach.update==
 
-leaderboard.get
-in
-key: string
-out
-key: string
-scores: RougeArray of RougeObject
-  user: string
-  score: long
-ret: boolean
+===in===
+  * key: string
+  * progress: double
+===out===
+  * key: string
+  * progress: double
 
-leaderboard.gets
-in
-out
-leaderboard: RougeArray of RougeObject
-  key: string
-  scores: RougeArray of RougeObject
-    user: string
-    score: long
-ret: boolean
+=Leaderboards=
 
-leaderboard.submit
-in
-key: string
-score: long
-out:
-key: string
-ret: boolean
+==leaderboard.get==
+
+===in===
+  * key: string
+===out===
+  * key: string
+  * scores: RougeArray of RougeObject
+    * user: string
+    * score: long
+  * ret: boolean
+
+==leaderboard.gets==
+
+===in===
+  * None
+===out===
+  * leaderboard: RougeArray of RougeObject
+    * key: string
+    * scores: RougeArray of RougeObject
+      * user: string
+      * score: long
+  * ret: boolean
+
+==leaderboard.submit==
+
+===in===
+  * key: string
+  * score: long
+===out===
+  * key: string
+  * ret: boolean
+
+=Mail=
+---
 
 mail.getall
 in
