@@ -1,77 +1,240 @@
 #summary The protocol used by Rouge server.
 
-= Client messages =
+=Server & Authentification=
 
-Login user, password, protocol version
-Return s,f
+== login==
 
-Room.create name
-Return s,f
+===in===
+  * username: string
+  * password: string
+===out===
+  * ret: boolean
 
-Room.delete name
-Return s,f
+==user.create==
 
-Room.join name
-Return s,f
+===in===
+  * username: string
+  * password: string
+  * firstname: string
+  * lastname: string
+  * email: string
+===out (success)===
+  * ret: boolean
+===out (error)===
+  * ret: boolean
+  * error: string
 
-Room.leave name
-Return s,f
+logoff
+in
+out
+ret: boolean
 
-Room.say name message
-Return s,f
+server.kicked
+in
+Never sent from client
+out
+reason: string
 
-Room.promote name user
-Return s,f
+im.msg
+in
+username: string
+msg: string
+out
+ret: boolean
 
-Room.kick name user
-Return s,f
+im.recv
+in
+Never sent from client
+out
+msg: string	
 
-User.msg toUser message
-Return s,f
+ach.get
+in
+out
+ach : RougeArray of RougeObject
+  	key: string
+  	point: int
+  	progress: double
+  	total: double
+ret: boolean
 
-File.create key shared(bool)
-Return s,f
+ach.update
+in
+key: string
+progress: double
+out
+key: string
+progress: double
 
-File.read key (pattern allowed)
-Return value, version
+leaderboard.get
+in
+key: string
+out
+key: string
+scores: RougeArray of RougeObject
+  user: string
+  score: long
+ret: boolean
 
-File.write key value version
-Return s,f
+leaderboard.gets
+in
+out
+leaderboard: RougeArray of RougeObject
+  key: string
+  scores: RougeArray of RougeObject
+    user: string
+    score: long
+ret: boolean
 
-Social.add user
-Return s,f
+leaderboard.submit
+in
+key: string
+score: long
+out:
+key: string
+ret: boolean
 
-Social.remove user
-Return s,f
+mail.getall
+in
+out
+mails: RougeArray of RougeObject
+  id: long
+  to: long
+  from: long
+  content: RougeObject
+ret: boolean
 
-Social.send message
-Return s,f
+mail.getunread
+in
+out
+mails: RougeArray of RougeObject
+  id: long
+  to: long
+  from: long
+  content: RougeObject
+ret: boolean
 
-Social.list
-Return collection user
+mail.send
+in
+long: to
+content: RougeObject
+out
+ret: boolean
 
-Var.set key value
-Return s,f
+mail.setread
+in
+id: long
+out
+ret: boolean
 
-Var.get key
-Return value
+mail.delete
+in
+id: long
+out
+ret: boolean
 
-Var.sub key (user)
-Return s,f (eventually add patterns, creates interest management)
+room.create
+in
+name: key
+out
+ret: boolean
 
-Var.unsub key (user)
-Return s,f
+room.delete
+in
+name: key
+out
+ret: boolean
 
-= Server messages =
+room.join
+in
+name: key
+out
+ret: boolean
 
-Room.recv name message
-Room.kicked name
-Room.delete name
+room.leave
+in
+name: key
+out
+ret: boolean
 
-Msg.recv fromUser message
+room.say
+in
+name: key
+msg: RougeObject
+out
+ret: boolean
 
-Server.kicked reason
+room.recv
+in
+Never sent from client
+out
+name: key
+msg: RougeObject
+ret: boolean
 
-Social.recv message
+room.kicked
+in
+Never sent from client
+out
+name: string
 
-Var.update key value
+room.destroy
+in
+Never sent from client
+out
+name: string
+
+recv.whois
+in
+out
+people: RougeArray of String (usernames)
+ret: boolean
+
+var.set
+in
+key: string
+value: RougeObject
+out
+key: string
+ret: boolean
+
+var.get
+in
+key: string
+out
+key: string
+value: RougeObject
+ret: boolean
+
+var.sub
+in
+key: string
+out
+key: string
+ret: boolean
+
+var.unsub
+in
+key: string
+out
+key: string
+ret: boolean
+
+var.pset
+in
+key: string
+value: RougeObject
+version: long
+out
+key: string
+ret: boolean
+
+var.pget
+var.get
+in
+key: string
+out
+key: string
+value: RougeObject
+ret: boolean
+version: long
