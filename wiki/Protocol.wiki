@@ -209,63 +209,62 @@ Never sent from client
 ===out===
   * name: string
 
-room.destroy
-in
+==room.destroy==
 Never sent from client
-out
-name: string
+===out===
+  * name: string
 
-recv.whois
-in
-out
-people: RougeArray of String (usernames)
-ret: boolean
+==room.whois==
+===in===
+  * None
+===out===
+  * people: RougeArray of String (usernames)
+  * ret: boolean
 
-var.set
-in
-key: string
-value: RougeObject
-out
-key: string
-ret: boolean
+==var.set==
+===in===
+  * key: string
+  * value: RougeObject
+===out===
+  * key: string
+  * ret: boolean
 
-var.get
-in
-key: string
-out
-key: string
-value: RougeObject
-ret: boolean
+==var.get==
+===in===
+  * key: string
+===out===
+  * key: string
+  * value: RougeObject
+  * ret: boolean
 
-var.sub
-in
-key: string
-out
-key: string
-ret: boolean
+==var.sub==
+===in===
+  * key: string
+===out===
+  * key: string
+  * ret: boolean
 
-var.unsub
-in
-key: string
-out
-key: string
-ret: boolean
+==var.unsub==
+===in===
+  * key: string
+===out===
+  * key: string
+  * ret: boolean
 
-var.pset
-in
-key: string
-value: RougeObject
-version: long
-out
-key: string
-ret: boolean
+==var.pset==
+===in===
+  * key: string
+  * value: RougeObject
+  * version: long
+===out===
+  * key: string
+  * ret: boolean
 
-var.pget
-var.get
-in
-key: string
-out
-key: string
-value: RougeObject
-ret: boolean
-version: long
+==var.pget==
+===in===
+  * key: string
+===out===
+  * key: string
+  * value: RougeObject
+  * ret: boolean
+  * version: long
