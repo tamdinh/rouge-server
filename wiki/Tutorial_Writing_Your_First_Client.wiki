@@ -1,19 +1,136 @@
 #summary Describes how to write your first client program for RougeServer.
 
-= Introduction =
+In all API, communicating with a RougeServer involves two classes, RougeDriver and RougeListener. 
+RougeDriver handles the connection itself, and provides the methods to send messages. 
+RougeListener is more of an interface/protocol, defining the necessary methods that are 
+required to receive messages and events from RougeServer.
 
-Rouge was designed to be flexible.
+At its core, RougeServer is only a communication framework. Messages are a combination of a 
+command with its corresponding payload. The command is a simple string, while the payload
+is a hashmap of object, encapsulated within a RougeObject. Any messages can be sent to
+the server, as long as the appropriate server handler are registered within the RougeServer.
+If the basic functionalities provideds by RougeServer does not fit your needs, you are
+encouraged to write your own custom server handler.
 
+=Step by Step Example=
 
-= Details =
+The following example describes a client that will connect to a RougeServer, create a 
+chat room and then send a message to that room. Althought Java was chosen for this 
+example, the complete source code for all supported API language is provided below.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+To learn how the room API, or any other API provided by RougeServer functions, you are
+encouraged to check out the protocol documentation at http://
 
+Imports are sometimes ommitted in this example to simplify the code.
 
-= Java =
+==Step 1: Create the class==
+
+As previously mentioned, RougeListener is used to describe classes that receive data 
+from the Rouge Server. In this case, we create a simple RougeTest class that implements
+the RougeListenever class. This adds three methods to our class.
+
+{{{
+
+public class RougeTest extends RougeListener {
+
+	@Override
+	public void onMessage(String command, RougeObject payload) { }
+
+	@Override
+	public void onConnect() { }
+
+	@Override
+	public void onDisconnect() { }
+
+}
+
+}}}
+
+The onConnect() method is triggered when the driver connects to the Rouge Server. This is
+usually a good time to login. As for the onDisconnect() method, it is triggered when the 
+driver loses connection to the server. The onMessage method is triggered every time a message is
+returned from the server. When using commands provided by RougeServer, their output is described 
+in the protocol described at http://  . In this example, using the messages are printed out
+to STDOUT. The toJSon method is used to describe the content of the payload.
+
+{{{
+	@Override
+	public void onMessage(String command, RougeObject payload) {
+		
+		System.out.println(command + " " + payload.toJSON().toString());	
+	}
+}}}
+
+==Step 2: Login==
+
+Also mentioned previously, RougeDriver handles the connections with the server. The first step
+is to create the object, connect and send a login command with a username and password payload.
+
+{{{
+	this.driver = new RougeDriver("localhost", 6611, this, false);
+		
+	try {
+			this.driver.connect();
+	} catch (RougeConnectionFailure e) {
+		e.printStackTrcce;
+	}
+}}}
+
+Note that the default configuration of RougeServer authenticates users from the MySQL database. You
+might want to add a using manually to the user table, or experiment with the user.create command 
+insead.
+
+{{{
+	@Override
+	public void onConnect() {
+		
+		log.trace("Connected ...");
+		
+		RougeObject payload = new RougeObject();
+		payload.putString("username", "bob");
+		payload.putString("password", "password");
+				
+		this.driver.send("login", payload);
+	}
+}}}
+
+==Step 3: Sending a command==
+
+We want to create the room once we are logged in. This is because anonymous users have very little
+rights in RougeServer. Typically, they can login or create new accounts. To send the command
+at the appropriate time, we monitor the onReceive method. It's the same situation with waiting 
+for a room to be created before sending a message.
+
+{{{
+	@Override
+	public void onMessage(String command, RougeObject payload) {
+		
+		if ("login".equals(command)) {
+			RougeObject newPayload = new RougeObject();
+			
+			newPayload.putString("name", "testRoom");
+			this.driver.send("room.create", newPayload);
+			
+		} else if ("room.create".equals(command)) {
+			
+			RougeObject newPayload = new RougeObject();
+			newPayload.putString("name", "testRoom");
+			newPayload.putString("message", "hello");
+			this.driver.send("room.say", newPayload);
+		}
+	}
+}}}
+
+==Step 4: Beyond==
+
+Well, there is no formal step 4. Once you have setup the connection and received responses, you
+know most of what goes on in client programming.
+
+=Complete Samples=
+
+Here are the complete samples in Java, Objective-C and C#.
+
+==Java==
 
 {{{
 
@@ -44,7 +161,19 @@ public class RougeTest extends RougeListener {
 	@Override
 	public void onMessage(String command, RougeObject payload) {
 		
-		System.out.println(command + " " + payload.toJSON().toString());
+		if ("login".equals(command)) {
+			RougeObject newPayload = new RougeObject();
+			
+			newPayload.putString("name", "testRoom");
+			this.driver.send("room.create", newPayload);
+			
+		} else if ("room.create".equals(command)) {
+			
+			RougeObject newPayload = new RougeObject();
+			newPayload.putString("name", "testRoom");
+			newPayload.putString("message", "hello");
+			this.driver.send("room.say", newPayload);
+		}
 	}
 
 	@Override
@@ -77,11 +206,11 @@ public class RougeTest extends RougeListener {
 
 }}}
 
-=Objective-C=
+==Objective-C==
 
 The Objective-C example is wrapped in a simple Cocoa application that opens a window and then connects to the server.
 
-==RougeDriverAppDelegate.h==
+===RougeDriverAppDelegate.h===
 
 {{{
 #import <Cocoa/Cocoa.h>
@@ -98,7 +227,8 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
 @end
 }}}
 
-==RougeDriverAppDelegate.c==
+===RougeDriverAppDelegate.c===
+
 {{{
 #import "RougeDriverAppDelegate.h"
 
@@ -113,7 +243,6 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
     [driver connect:@"localhost" toPort:6612 withBEncoding:true];
     
 }
-
 
 - (void) onConnect {
                     
@@ -149,7 +278,7 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
 @end
 }}}
 
-=C#=
+==C#==
 
 class Program : RougeListener
 {
