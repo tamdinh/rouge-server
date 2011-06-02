@@ -1,6 +1,6 @@
 #summary Describes how to write your first client program for RougeServer.
 
-In all API, communicating with a RougeServer involves two classes, RougeDriver and RougeListener. 
+In all API, communicating with a !RougeServer involves two classes, RougeDriver and RougeListener. 
 RougeDriver handles the connection itself, and provides the methods to send messages. 
 RougeListener is more of an interface/protocol, defining the necessary methods that are 
 required to receive messages and events from RougeServer.
