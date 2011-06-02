@@ -146,6 +146,9 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
     NSLog(@"Message received! %@ %@", command,  [rougeObject toDictionary]);
 }
 
+@end
+}}}
+
 =C#=
 
 class Program : RougeListener
@@ -200,7 +203,4 @@ class Program : RougeListener
             while (true) ;
         }  
     }
-}}}
-
-@end
 }}}
