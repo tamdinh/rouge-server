@@ -50,8 +50,7 @@ The onConnect() method is triggered when the driver connects to the Rouge Server
 usually a good time to login. As for the onDisconnect() method, it is triggered when the 
 driver loses connection to the server. The onMessage method is triggered every time a message is
 returned from the server. When using commands provided by !RougeServer, their output is described 
-in the protocol described at http://  . In this example, using the messages are printed out
-to STDOUT. The toJSon method is used to describe the content of the payload.
+in the protocol described at http://code.google.com/p/rouge-server/wiki/Protocol . In this example, using the messages are printed out to STDOUT. The toJSon method is used to describe the content of the payload.
 
 {{{
 	@Override
@@ -282,6 +281,7 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
 
 This is the trickiest to setup, given that the driver and the sample programs are provided as two separate projects in a solution. However, the driver could be compiled into a DLL and linked to a new project.
 
+{{{
 class Program : RougeListener
 {
 		
