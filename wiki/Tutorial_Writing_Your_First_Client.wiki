@@ -209,7 +209,7 @@ public class RougeTest extends RougeListener {
 
 The Objective-C example is wrapped in a simple Cocoa application that opens a window and then connects to the server.
 
-===RougeDriverAppDelegate.h===
+===!RougeDriverAppDelegate.h===
 
 {{{
 #import <Cocoa/Cocoa.h>
@@ -226,7 +226,7 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
 @end
 }}}
 
-===RougeDriverAppDelegate.c===
+===!RougeDriverAppDelegate.c===
 
 {{{
 #import "RougeDriverAppDelegate.h"
