@@ -76,3 +76,75 @@ public class RougeTest extends RougeListener {
 }
 
 }}}
+
+=Objective-C=
+
+The Objective-C example is wrapped in a simple Cocoa application that opens a window and then connects to the server.
+
+==RougeDriverAppDelegate.h==
+
+{{{
+#import <Cocoa/Cocoa.h>
+#import "RougeDriver.h"
+
+@interface RougeDriverAppDelegate : NSObject <NSApplicationDelegate, RougeListener> {
+@private
+    NSWindow *window;
+    RougeDriver* driver;
+}
+
+@property (assign) IBOutlet NSWindow *window;
+
+@end
+}}}
+
+==RougeDriverAppDelegate.c==
+{{{
+#import "RougeDriverAppDelegate.h"
+
+@implementation RougeDriverAppDelegate
+
+@synthesize window;
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    driver = [[RougeDriver alloc] initWithHandler:self];
+    
+    [driver connect:@"localhost" toPort:6612 withBEncoding:true];
+    
+}
+
+
+- (void) onConnect {
+                    
+    NSLog(@"On Connect");
+    
+    RougeObject *payload = [[RougeObject alloc] init]; 
+    [payload putString:@"bob" withKey:@"username"];
+    [payload putString:@"password" withKey:@"password"];
+    
+    [driver send:@"login" withPayLoad:payload];
+    
+    payload = [[RougeObject alloc] init]; 
+    [payload putString:@"main" withKey:@"name"];
+    
+    [driver send:@"room.create" withPayLoad:payload];
+    
+    [payload putString:@"message" withKey:@"hello!"];
+    
+    [driver send:@"room.say" withPayLoad:payload];   
+}
+                    
+- (void) onDisconnect {
+
+    NSLog(@"On Disconnect");
+}
+                    
+
+- (void) onMessage:(NSString *)command withPayLoad:(RougeObject *)rougeObject {
+    
+    NSLog(@"Message received! %@ %@", command,  [rougeObject toDictionary]);
+}
+
+@end
+}}}
