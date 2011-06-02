@@ -146,5 +146,61 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
     NSLog(@"Message received! %@ %@", command,  [rougeObject toDictionary]);
 }
 
+=C#=
+
+class Program : RougeListener
+{
+		
+	private RougeDriver driver;
+		
+	public Program() {
+
+            driver = new RougeDriver("127.0.0.1", 6611, this, false);
+            driver.connect();
+			
+	}
+		
+	public void onMessage(string command, RougeObject payload) {
+			
+		Console.WriteLine("Received {0} {1}", command, payload.toJson());
+			
+		if (command.Equals("login")) 
+		{
+			RougeObject rougeObject = new RougeObject();
+        	    	rougeObject.putString("name", "csroom2");
+       			driver.send("room.create", rougeObject);
+		} 
+		else if (command.Equals("room.create")) 
+		{
+			RougeObject rougeObject = new RougeObject();
+			rougeObject.putString("name", "csroom2");
+            		rougeObject.putString("message", "hello");
+       			driver.send("room.say", rougeObject);
+		}
+	}
+		
+       public void onConnect() {
+			
+	    RougeObject rougeObject = new RougeObject();
+            rougeObject.putString("username", "bob");
+            rougeObject.putString("password", "password");
+			
+	    driver.send("login", rougeObject);
+	}
+		
+        public void onDisconnect() {
+			
+		Console.WriteLine("Disconnected");
+	}
+		
+        static void Main(string[] args)
+        {
+            new Program();
+
+            while (true) ;
+        }  
+    }
+}}}
+
 @end
 }}}
