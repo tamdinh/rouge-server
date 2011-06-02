@@ -1,33 +1,33 @@
 #summary Describes how to write your first client program for RougeServer.
 
-In all API, communicating with a !RougeServer involves two classes, RougeDriver and RougeListener. 
-RougeDriver handles the connection itself, and provides the methods to send messages. 
-RougeListener is more of an interface/protocol, defining the necessary methods that are 
-required to receive messages and events from RougeServer.
+In all API, communicating with a !RougeServer involves two classes, !RougeDriver and !RougeListener. 
+!RougeDriver handles the connection itself, and provides the methods to send messages. 
+!RougeListener is more of an interface/protocol, defining the necessary methods that are 
+required to receive messages and events from !RougeServer.
 
-At its core, RougeServer is only a communication framework. Messages are a combination of a 
+At its core, !RougeServer is only a communication framework. Messages are a combination of a 
 command with its corresponding payload. The command is a simple string, while the payload
-is a hashmap of object, encapsulated within a RougeObject. Any messages can be sent to
-the server, as long as the appropriate server handler are registered within the RougeServer.
-If the basic functionalities provideds by RougeServer does not fit your needs, you are
+is a hash-map of object, encapsulated within a !RougeObject. Any messages can be sent to
+the server, as long as the appropriate server handler are registered within the !RougeServer.
+If the basic functionalities provided by !RougeServer does not fit your needs, you are
 encouraged to write your own custom server handler.
 
 =Step by Step Example=
 
-The following example describes a client that will connect to a RougeServer, create a 
-chat room and then send a message to that room. Althought Java was chosen for this 
+The following example describes a client that will connect to a !RougeServer, create a 
+chat room and then send a message to that room. Although Java was chosen for this 
 example, the complete source code for all supported API language is provided below.
 
-To learn how the room API, or any other API provided by RougeServer functions, you are
-encouraged to check out the protocol documentation at http://
+To learn how the room API, or any other API provided by !RougeServer functions, you are
+encouraged to check out the protocol documentation at http://code.google.com/p/rouge-server/wiki/Protocol
 
-Imports are sometimes ommitted in this example to simplify the code.
+Imports are sometimes omitted in this example to simplify the code.
 
 ==Step 1: Create the class==
 
-As previously mentioned, RougeListener is used to describe classes that receive data 
-from the Rouge Server. In this case, we create a simple RougeTest class that implements
-the RougeListenever class. This adds three methods to our class.
+As previously mentioned, !RougeListener is used to describe classes that receive data 
+from the !RougeServer. In this case, we create a simple RougeTest class that implements
+the !RougeListener class. This adds three methods to our class.
 
 {{{
 
@@ -49,7 +49,7 @@ public class RougeTest extends RougeListener {
 The onConnect() method is triggered when the driver connects to the Rouge Server. This is
 usually a good time to login. As for the onDisconnect() method, it is triggered when the 
 driver loses connection to the server. The onMessage method is triggered every time a message is
-returned from the server. When using commands provided by RougeServer, their output is described 
+returned from the server. When using commands provided by !RougeServer, their output is described 
 in the protocol described at http://  . In this example, using the messages are printed out
 to STDOUT. The toJSon method is used to describe the content of the payload.
 
@@ -63,7 +63,7 @@ to STDOUT. The toJSon method is used to describe the content of the payload.
 
 ==Step 2: Login==
 
-Also mentioned previously, RougeDriver handles the connections with the server. The first step
+Also mentioned previously, !RougeDriver handles the connections with the server. The first step
 is to create the object, connect and send a login command with a username and password payload.
 
 {{{
@@ -76,9 +76,9 @@ is to create the object, connect and send a login command with a username and pa
 	}
 }}}
 
-Note that the default configuration of RougeServer authenticates users from the MySQL database. You
+Note that the default configuration of !RougeServer authenticates users from the MySQL database. You
 might want to add a using manually to the user table, or experiment with the user.create command 
-insead.
+instead.
 
 {{{
 	@Override
@@ -97,7 +97,7 @@ insead.
 ==Step 3: Sending a command==
 
 We want to create the room once we are logged in. This is because anonymous users have very little
-rights in RougeServer. Typically, they can login or create new accounts. To send the command
+rights in !RougeServer. Typically, they can login or create new accounts. To send the command
 at the appropriate time, we monitor the onReceive method. It's the same situation with waiting 
 for a room to be created before sending a message.
 
@@ -279,6 +279,8 @@ The Objective-C example is wrapped in a simple Cocoa application that opens a wi
 }}}
 
 ==C#==
+
+This is the trickiest to setup, given that the driver and the sample programs are provided as two separate projects in a solution. However, the driver could be compiled into a DLL and linked to a new project.
 
 class Program : RougeListener
 {
