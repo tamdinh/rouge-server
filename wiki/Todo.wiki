@@ -14,7 +14,7 @@
  
 =Amazon=
 
-* Stress Test Using Aws
+ * Stress Test Using Aws
 
 =Deployment=
 
