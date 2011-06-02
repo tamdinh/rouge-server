@@ -5,7 +5,7 @@ This document introduces how to download rouge-server and install it. It assumes
 
 =What is Rouge?=
 
-RougeServer is a highly customizable and modular Massively Multi-player Online (MMO) game server. An API is provided for Objective-C, Java and C#, making it ideal for iOs, Android and Windows Mobile. It provides basic communication services between players (instant messages, rooms, etc.), and various data storage/sharing schemes (persistent variables, mailboxes, etc.).
+Rouge Server is a highly customizable and modular Massively Multi-player Online (MMO) game server. An API is provided for Objective-C, Java and C#, making it ideal for iOs, Android and Windows Mobile. It provides basic communication services between players (instant messages, rooms, etc.), and various data storage/sharing schemes (persistent variables, mailboxes, etc.).
 
 Rouge Server is licensed under the Apache Licenses 2.0 and uses a collection of libraries, most of them also under the Apache license or under the MIT license. There is also the MySQL JDBC connector, which is licensed under the GPL, under the FOSS exception.
 
