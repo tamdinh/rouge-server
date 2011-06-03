@@ -2,7 +2,11 @@
 
 =Server & Authentification=
 
+This module contains commands related to authentication.
+
 == login==
+
+Authenticate user using credentials found in the MySQL database.
 
 ===in===
   * username: string
@@ -11,6 +15,8 @@
   * ret: boolean
 
 ==user.create==
+
+Create a user using the given credential. The user will be considered authenticated.
 
 ===in===
   * username: string
@@ -27,18 +33,26 @@
 
 ==logoff==
 
+Disconnect self from the server.
+
+===in===
 ===out===
   * ret: boolean
 
 ==server.kicked==
 
-Never sent from client
+Sent by the server when user is kicked. Never sent from client.
+
 ===out===
   * reason: string
 
 =Instant Message=
 
+This module is used for communication between users.
+
 ==im.msg==
+
+Send a message to a target user.
 
 ===in===
   * username: string
@@ -48,13 +62,18 @@ Never sent from client
 
 ==im.recv==
 
-Never sent from client
+Sent by server when a message is sent by another user. Never sent from client.
+
 ===out===
   * msg: string	
 
 =Achievements=
 
+This module includes messages related to achievements.
+
 ==ach.get==
+
+Returns all the achievements earned by a player (or in progress).
 
 ===in===
   * none 
@@ -68,6 +87,8 @@ Never sent from client
 
 ==ach.update==
 
+Update the progress on an achievement.
+
 ===in===
   * key: string
   * progress: double
@@ -77,7 +98,11 @@ Never sent from client
 
 =Leaderboards=
 
+Includes commands related to leaderboards.
+
 ==leaderboard.get==
+
+Retrieve a specific a leaderboard.
 
 ===in===
   * key: string
@@ -89,6 +114,8 @@ Never sent from client
   * ret: boolean
 
 ==leaderboard.gets==
+
+Retrieve all leaderboards stored on the server.
 
 ===in===
   * None
@@ -102,6 +129,8 @@ Never sent from client
 
 ==leaderboard.submit==
 
+Submit a score to a specific leaderboard.
+
 ===in===
   * key: string
   * score: long
@@ -111,7 +140,11 @@ Never sent from client
 
 =Mail=
 
+This module has commands related to mails.
+
 ==mail.getall==
+
+Get all the mails in the user's mailbox.
 
 ===in===
   * None
@@ -125,6 +158,8 @@ Never sent from client
 
 ==mail.getunread==
 
+Get the unread emails in the user's mailbox.
+
 ===in===
 * None
 ===out===
@@ -137,6 +172,8 @@ Never sent from client
 
 ==mail.send==
 
+Send a mail to target user.
+
 ===in===
   * long: to
   * content: RougeObject
@@ -145,12 +182,16 @@ Never sent from client
 
 ==mail.setread==
 
+Tag mail as read.
+
 ===in===
   * id: long
 ===out===
  * ret: boolean
 
 ==mail.delete==
+
+Tag mail as deleted.
 
 ===in===
   * id: long
@@ -159,7 +200,11 @@ Never sent from client
 
 =Rooms=
 
+This module contains command related to rooms.
+
 ==room.create==
+
+Create a room using the given name. The room is automatically joined as an admin.
 
 ===in===
   * name: key
@@ -168,12 +213,16 @@ Never sent from client
 
 ==room.delete==
 
+Delete the room of the given name. This can only be done by an admin.
+
 ===in===
   * name: key
 ===out===
   * ret: boolean
 
 ==room.join==
+
+Join a room of the given name.
 
 ===in===
   * name: key
@@ -182,12 +231,16 @@ Never sent from client
 
 ==room.leave==
 
+Leave the room of the given name.
+
 ===in===
   * name: key
 ===out===
   * ret: boolean
 
 ==room.say==
+
+Send a message to all users in a given room.
 
 ===in===
   * name: key
@@ -197,7 +250,8 @@ Never sent from client
 
 ==room.recv==
 
-Never sent from client
+Received by all the users in a given room when something is said. Never sent from client
+
 ===out===
   * name: key
   * msg: RougeObject
@@ -205,21 +259,29 @@ Never sent from client
 
 ==room.kicked==
 
-Never sent from client
+Received when kicked from the room. Never sent from client.
+
 ===out===
   * name: string
 
 ==room.destroy==
-Never sent from client
+
+Received when the room is destroyed. Never sent from client.
+
 ===out===
   * name: string
 
 ==room.whois==
+
+Returns a like of users in a given room.
+
 ===in===
   * None
 ===out===
   * people: RougeArray of String (usernames)
   * ret: boolean
+
+=Variables=
 
 ==var.set==
 ===in===
