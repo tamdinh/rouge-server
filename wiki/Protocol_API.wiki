@@ -82,7 +82,7 @@ Returns all the achievements earned by a player (or in progress).
 ===in===
   * none 
 ===out===
-  * ach : RougeArray of RougeObject
+  * ach : RougeArray of !RougeObject
     * key: string
     * point: int
     * progress: double
@@ -114,7 +114,7 @@ Retrieve a specific a leaderboard.
   * key: string
 ===out===
   * key: string
-  * scores: RougeArray of RougeObject
+  * scores: RougeArray of !RougeObject
     * user: string
     * score: long
   * ret: boolean
@@ -126,9 +126,9 @@ Retrieve all leaderboards stored on the server.
 ===in===
   * None
 ===out===
-  * leaderboard: RougeArray of RougeObject
+  * leaderboard: RougeArray of !RougeObject
     * key: string
-    * scores: RougeArray of RougeObject
+    * scores: RougeArray of !RougeObject
       * user: string
       * score: long
   * ret: boolean
@@ -157,11 +157,11 @@ Get all the mails in the user's mailbox.
 ===in===
   * None
 ===out===
-  * mails: RougeArray of RougeObject
+  * mails: RougeArray of !RougeObject
     * id: long
     * to: long
     * from: long
-    * content: RougeObject
+    * content: !RougeObject
   * ret: boolean
 
 ==mail.getunread==
@@ -171,11 +171,11 @@ Get the unread emails in the user's mailbox.
 ===in===
 * None
 ===out===
-  * mails: RougeArray of RougeObject
+  * mails: RougeArray of !RougeObject
     * id: long
     * to: long
     * from: long
-    * content: RougeObject
+    * content: !RougeObject
   * ret: boolean
 
 ==mail.send==
@@ -184,7 +184,7 @@ Send a mail to target user.
 
 ===in===
   * long: to
-  * content: RougeObject
+  * content: !RougeObject
 ===out===
   * ret: boolean
 
@@ -254,7 +254,7 @@ Send a message to all users in a given room.
 
 ===in===
   * name: key
-  * msg: RougeObject
+  * msg: !RougeObject
 ===out===
   * ret: boolean
 
@@ -264,7 +264,7 @@ Received by all the users in a given room when something is said. Never sent fro
 
 ===out===
   * name: key
-  * msg: RougeObject
+  * msg: !RougeObject
   * ret: boolean
 
 ==room.kicked==
@@ -295,23 +295,34 @@ Returns a like of users in a given room.
 
 =Variables=
 
+This module has commands related to variables, used to store data. Normal variables are temporary, and disappear when the server is restarted. Persistent variable are stored to the database.
+
 ==var.set==
+
+Set the value of a variable.
+
 ===in===
   * key: string
-  * value: RougeObject
+  * value: !RougeObject
 ===out===
   * key: string
   * ret: boolean
 
 ==var.get==
+
+Get the value of a variable.
+
 ===in===
   * key: string
 ===out===
   * key: string
-  * value: RougeObject
+  * value: !RougeObject
   * ret: boolean
 
 ==var.sub==
+
+Subscribe to the variable of the given name.
+
 ===in===
   * key: string
 ===out===
@@ -319,6 +330,9 @@ Returns a like of users in a given room.
   * ret: boolean
 
 ==var.unsub==
+
+Unsubscribe from the variable of the given name.
+
 ===in===
   * key: string
 ===out===
@@ -326,19 +340,25 @@ Returns a like of users in a given room.
   * ret: boolean
 
 ==var.pset==
+
+Set the value of a persistent variable. Use version 0 to create a new variable. Otherwise you muse use the correct current version of the variable for the update to work.
+
 ===in===
   * key: string
-  * value: RougeObject
+  * value: !RougeObject
   * version: long
 ===out===
   * key: string
   * ret: boolean
 
 ==var.pget==
+
+Get the value a persistent variable and its version. The version is needed to set a new value.
+
 ===in===
   * key: string
 ===out===
   * key: string
-  * value: RougeObject
+  * value: !RougeObject
   * ret: boolean
   * version: long
