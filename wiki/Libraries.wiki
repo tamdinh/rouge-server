@@ -22,10 +22,14 @@
  * Commons Logging 1.1.1 - Apache License, Version 2.0
  * Commons Pool 1.5.6 - Apache License, Version 2.0
 
-= Shell =
+= Objective-C =
 
- * Java deamon script (Unix) - LGPL
+* Touch-JSon - MIT
 
 = .Net =
 
   * JSon.Net - MIT
+
+= Shell =
+
+ * Java deamon script (Unix) - LGPL
