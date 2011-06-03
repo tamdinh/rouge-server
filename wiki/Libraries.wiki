@@ -25,3 +25,7 @@
 = Shell =
 
  * Java deamon script (Unix) - LGPL
+
+= .Net =
+
+  * JSon.Net - MIT
